@@ -32,16 +32,22 @@
   /* 顶栏 */
   header {
     position: sticky; top: 0; z-index: 20;
-    background: rgba(11, 20, 36, .85);
+    background: rgba(11, 20, 36, .88);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
   }
-  nav { display: flex; align-items: center; gap: 22px; height: 62px; }
-  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 1px; }
+  nav { display: flex; align-items: center; gap: 18px; height: 62px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 1px; white-space: nowrap; }
   .logo img { width: 30px; height: 30px; border-radius: 7px; }
-  nav .links { margin-left: auto; display: flex; gap: 18px; font-size: 14px; }
+  nav .links { margin-left: auto; display: flex; gap: 16px; font-size: 14px; align-items: center; }
   nav .links a { color: var(--muted); }
   nav .links a:hover { color: var(--text); }
+  .langs { display: flex; gap: 4px; margin-left: 6px; }
+  .langs button {
+    font-size: 12px; padding: 4px 9px; border-radius: 999px; cursor: pointer;
+    background: var(--panel); color: var(--muted); border: 1px solid var(--line);
+  }
+  .langs button.on { color: #fff; background: #1f5138; border-color: var(--green); }
 
   /* Hero */
   .hero { padding: 92px 0 70px; text-align: center; }
@@ -52,12 +58,12 @@
   }
   .hero h1 { font-size: 46px; letter-spacing: 2px; }
   .hero h1 span { color: var(--green); }
-  .hero .sub { margin: 16px auto 30px; max-width: 640px; color: var(--muted); font-size: 17px; }
+  .hero .sub { margin: 16px auto 30px; max-width: 680px; color: var(--muted); font-size: 17px; }
   .btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
   .btn {
     display: inline-block; padding: 11px 24px; border-radius: 10px; font-weight: 700;
     border: 1px solid var(--line); background: var(--panel); color: var(--text);
-    transition: .2s;
+    transition: .2s; cursor: pointer;
   }
   .btn:hover { transform: translateY(-1px); border-color: var(--accent); }
   .btn.primary { background: linear-gradient(180deg, #1f8a4c, #166e3a); border-color: #2aa15c; }
@@ -78,7 +84,7 @@
   /* 区块通用 */
   section { padding: 64px 0; }
   section h2 { text-align: center; font-size: 30px; letter-spacing: 1px; margin-bottom: 12px; }
-  section .lead { text-align: center; color: var(--muted); max-width: 640px; margin: 0 auto 40px; }
+  section .lead { text-align: center; color: var(--muted); max-width: 680px; margin: 0 auto 40px; }
 
   .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .card {
@@ -103,9 +109,9 @@
   .plan .btn { width: 100%; text-align: center; }
 
   /* 更新日志 */
-  .log { max-width: 720px; margin: 0 auto; }
+  .log { max-width: 760px; margin: 0 auto; }
   .log .ver { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
-  .log .tag { flex: 0 0 130px; font-weight: 700; color: var(--gold); }
+  .log .tag { flex: 0 0 96px; font-weight: 700; color: var(--gold); }
   .log ul { padding-left: 18px; color: var(--muted); font-size: 14px; }
 
   /* FAQ */
@@ -136,12 +142,17 @@
 <header>
   <div class="wrap">
     <nav>
-      <div class="logo"><img src="assets/icon.png" alt="三叶草"><span>三叶草</span></div>
+      <div class="logo"><img src="assets/icon.png" alt="Clover"><span>三叶草</span></div>
       <div class="links">
-        <a href="#features">功能</a>
-        <a href="#download">下载购买</a>
-        <a href="#changelog">更新日志</a>
-        <a href="#faq">常见问题</a>
+        <a href="#features" data-i18n="nav.features">功能</a>
+        <a href="#download" data-i18n="nav.download">下载购买</a>
+        <a href="#changelog" data-i18n="nav.changelog">更新日志</a>
+        <a href="#faq" data-i18n="nav.faq">常见问题</a>
+        <div class="langs">
+          <button id="langZh" onclick="setLang('zh-CN')">简中</button>
+          <button id="langEn" onclick="setLang('en')">EN</button>
+          <button id="langTw" onclick="setLang('zh-TW')">繁體</button>
+        </div>
       </div>
     </nav>
   </div>
@@ -150,12 +161,12 @@
 <main>
   <div class="hero">
     <div class="wrap">
-      <span class="badge">本地优先 · 数据只存在你自己电脑里</span>
-      <h1>三叶草 · <span>Clover</span></h1>
-      <p class="sub">一款安静、好用的 Windows 记事本：普通笔记、星光纸面、桌面小精灵，再内置可随时切换的 AI 助手——支持 DeepSeek、豆包、GLM、ChatGPT、千问。</p>
+      <span class="badge" data-i18n="hero.badge">本地优先 · 数据只存在你自己电脑里</span>
+      <h1 data-i18n="hero.h1">三叶草 · <span>Clover</span></h1>
+      <p class="sub" data-i18n="hero.sub">一款安静、好用的 Windows 记事本：普通笔记、五种特色纸面、桌面小精灵，再内置可随时切换的 AI 助手——支持 DeepSeek、豆包、GLM、ChatGPT、千问。</p>
       <div class="btns">
-        <a class="btn primary" href="#download">下载体验</a>
-        <a class="btn ghost" href="#features">看看功能</a>
+        <a class="btn primary" href="#download" data-i18n="btn.download">下载体验</a>
+        <a class="btn ghost" href="#features" data-i18n="btn.features">看看功能</a>
       </div>
     </div>
   </div>
@@ -163,86 +174,103 @@
   <div class="shots">
     <div class="wrap">
       <div class="shot-main">
-        <img src="assets/shot-main.png" alt="三叶草主界面截图">
+        <img src="assets/shot-main.png" data-alt="shot.mainAlt">
       </div>
       <div class="shot-row">
-        <figure><img src="assets/shot-feature.png" alt="特色纸面笔记与 AI 助手"><figcaption>特色纸面笔记 + AI 助手</figcaption></figure>
-        <figure><img src="assets/shot-settings.png" alt="多语言与外观设置"><figcaption>三语界面 · 深色/浅色 · 一键备份</figcaption></figure>
+        <figure><img src="assets/shot-feature.png" data-alt="shot.featAlt"><figcaption data-i18n="shot.featureCap">特色纸面笔记 + AI 助手</figcaption></figure>
+        <figure><img src="assets/shot-settings.png" data-alt="shot.setAlt"><figcaption data-i18n="shot.settingsCap">英文界面 · 三语一键切换</figcaption></figure>
       </div>
     </div>
   </div>
 
   <section id="features">
     <div class="wrap">
-      <h2>它能帮你做什么</h2>
-      <p class="lead">从随手记录到让 AI 参与思考，一个软件就够了。</p>
+      <h2 data-i18n="feat.title">它能帮你做什么</h2>
+      <p class="lead" data-i18n="feat.lead">从随手记录到让 AI 参与思考，一个软件就够了。</p>
       <div class="features">
-        <div class="card"><div class="ico">📝</div><h3>本地记事本</h3><p>自动保存、搜索、置顶、碎纸机批量删除、文字上色与插图，笔记以文件形式存在你电脑里，随时可备份。</p></div>
-        <div class="card"><div class="ico">✦</div><h3>内置多 AI</h3><p>DeepSeek、豆包、GLM、ChatGPT、千问自由切换，每篇笔记拥有独立对话记忆，也可以一键把聊天存成笔记。</p></div>
-        <div class="card"><div class="ico">🎨</div><h3>特色纸面</h3><p>星光、扑克、小清新、粉泡泡、浪花五种主题纸，记录也能有氛围感；每日签到赚三叶草币解锁。</p></div>
-        <div class="card"><div class="ico">☘</div><h3>桌面小精灵</h3><p>一只三叶草小精灵可以住在桌面陪你，支持拖拽与简单互动，可设置开机自动召唤。</p></div>
-        <div class="card"><div class="ico">🌍</div><h3>三语界面</h3><p>简体中文、English、繁體中文一键切换，连帮助和设置都完整翻译。</p></div>
-        <div class="card"><div class="ico">🔐</div><h3>隐私与授权</h3><p>API Key 加密保存在本机、无日志回传；激活码绑定单台电脑，防止拷贝转卖。</p></div>
+        <div class="card"><div class="ico">📝</div><h3 data-i18n="f1t">本地记事本</h3><p data-i18n="f1p">自动保存、标题搜索、置顶、碎纸机与批量删除、文字上色与插图；笔记以本地文件保存，随时备份不丢失。</p></div>
+        <div class="card"><div class="ico">✦</div><h3 data-i18n="f2t">内置多 AI</h3><p data-i18n="f2p">DeepSeek、豆包、GLM、ChatGPT、千问自由切换，模型可选或自定义；每篇笔记独立对话记忆，聊天可一键存为笔记。</p></div>
+        <div class="card"><div class="ico">🎨</div><h3 data-i18n="f3t">特色纸面</h3><p data-i18n="f3p">星光、扑克、小清新、粉泡泡、浪花五种主题纸；每日签到赚三叶草币解锁，赞助码也能兑换。</p></div>
+        <div class="card"><div class="ico">☘</div><h3 data-i18n="f4t">桌面小精灵</h3><p data-i18n="f4p">三叶草小精灵住在桌面陪你：可拖拽、有专属小功能，还能设置随软件一起启动。</p></div>
+        <div class="card"><div class="ico">🌍</div><h3 data-i18n="f5t">三语界面</h3><p data-i18n="f5p">简体中文、English、繁體中文完整翻译，设置里一键切换，帮助与设置同样全量翻译。</p></div>
+        <div class="card"><div class="ico">🔐</div><h3 data-i18n="f6t">隐私与授权</h3><p data-i18n="f6p">API Key 只在本机加密保存、无日志回传；激活码一机一码并绑定硬件，防止拷贝转卖。</p></div>
       </div>
     </div>
   </section>
 
   <section id="download" style="background: rgba(15,27,49,.45);">
     <div class="wrap">
-      <h2>下载与购买</h2>
-      <p class="lead">一个版本，买断即用；目前仅支持 Windows 电脑，安卓 / iOS 版正在规划中。</p>
+      <h2 data-i18n="download.title">下载与购买</h2>
+      <p class="lead" data-i18n="download.lead">一个版本，买断即用；目前支持 Windows 电脑，安卓 / iOS 正在规划中。</p>
       <div class="buy-grid">
         <div class="plan hot">
-          <h3>三叶草 · Windows 版</h3>
-          <div class="price">¥19.9<small> / 一次性买断</small></div>
+          <h3 data-i18n="plan.name">三叶草 · Windows 版</h3>
+          <div class="price" data-i18n="plan.priceHtml">¥19.9<small> / 一次性买断</small></div>
           <ul>
-            <li>一码一机，永久使用</li>
-            <li>后续电脑版更新免费</li>
-            <li>软件内自动更新，不用手动换包</li>
-            <li>数据 100% 存在自己电脑里</li>
-            <li>联系作者获取激活码，可远程协助安装</li>
+            <li data-i18n="plan.li1">一码一机，永久使用</li>
+            <li data-i18n="plan.li2">后续电脑版更新免费</li>
+            <li data-i18n="plan.li3">软件内自动更新，不用手动换包</li>
+            <li data-i18n="plan.li4">数据 100% 存在自己电脑里</li>
+            <li data-i18n="plan.li5">联系作者获取激活码，可远程协助安装</li>
           </ul>
-          <a class="btn primary" href="mailto:your-email@example.com?subject=购买三叶草正式版">联系购买</a>
+          <a class="btn primary" id="contactBtn" href="mailto:your-email@example.com?subject=购买三叶草正式版" data-i18n="plan.btn">联系作者购买</a>
         </div>
       </div>
-      <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:18px">* 联系方式上线前会更新；手机版上线后会另行公告。</p>
+      <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:18px" data-i18n="download.note">联系方式与正式下载链接开售后公布；手机版上线后会另行公告。</p>
     </div>
   </section>
 
   <section id="changelog">
     <div class="wrap">
-      <h2>更新日志</h2>
-      <p class="lead">软件内点击“帮助 → 检查更新”即可收到新版提示。</p>
+      <h2 data-i18n="log.title">更新日志</h2>
+      <p class="lead" data-i18n="log.lead">软件内点击“帮助 → 检查更新”即可收到新版提示。</p>
       <div class="log">
-        <div class="ver"><div class="tag">v2.3.0</div><ul><li>三语界面完善，帮助中心显示版本与日期</li><li>修复特色笔记打开 AI 助手被背景遮挡的问题</li><li>优化新建/重命名输入框的输入法兼容性</li><li>离线加固：代码混淆打包 + 多因子机器码 + 文件自检</li></ul></div>
-        <div class="ver"><div class="tag">v2.2.x</div><ul><li>新增星光、扑克等五种特色纸面笔记</li><li>新增桌面小精灵与三叶草币签到体系</li><li>AI 助手支持多家服务商切换与分笔记记忆</li></ul></div>
+        <div class="ver"><div class="tag" data-i18n="log.v230">v2.3.0</div><ul>
+          <li data-i18n="log.l230_1">三语界面全量完善：简中 / English / 繁體，设置里一键切换</li>
+          <li data-i18n="log.l230_2">AI 助手升级：五家服务商、模型下拉选择或自定义、每篇笔记独立对话、一键存为笔记</li>
+          <li data-i18n="log.l230_3">五种特色纸面：星光 / 扑克 / 小清新 / 粉泡泡 / 浪花</li>
+          <li data-i18n="log.l230_4">三叶草币体系：每日签到 +20、赞助码兑换、防篡改签名</li>
+          <li data-i18n="log.l230_5">笔记管理完善：多篇置顶、碎纸机、大型碎纸机批量删除、文字上色、插图、备份 / 导入</li>
+          <li data-i18n="log.l230_6">桌面小精灵：拖拽与互动、快捷小功能、可设置随软件启动</li>
+          <li data-i18n="log.l230_7">设置升级：语言 / 字号 / 字体 / 深浅主题 / 窗口与全屏，保存后生效</li>
+          <li data-i18n="log.l230_8">离线加固：多因子机器码、激活码一机一码、程序文件自检，防拷贝转卖</li>
+        </ul></div>
+        <div class="ver"><div class="tag" data-i18n="log.v22">v2.2.x</div><ul>
+          <li data-i18n="log.l22_1">本地笔记：自动保存、标题搜索、置顶与删除</li>
+          <li data-i18n="log.l22_2">初代特色纸面与桌面小精灵、三叶草币签到</li>
+          <li data-i18n="log.l22_3">AI 助手接入多家服务商，分笔记独立对话</li>
+        </ul></div>
       </div>
     </div>
   </section>
 
   <section id="faq" style="background: rgba(15,27,49,.45);">
     <div class="wrap">
-      <h2>常见问题</h2>
+      <h2 data-i18n="faq.title">常见问题</h2>
       <div class="faq">
         <details open>
-          <summary>我的笔记存在哪里？会不会丢？</summary>
-          <p>所有笔记都以 HTML 文件保存在软件旁的「笔记」文件夹里，随时可以整文件夹备份或使用软件内置备份功能。复制整个软件文件夹就是完整备份。</p>
+          <summary data-i18n="faq.q1">我的笔记存在哪里？会不会丢？</summary>
+          <p data-i18n="faq.a1">所有笔记都以文件形式保存在软件旁的「笔记」文件夹里，随时可以整文件夹备份，或使用软件内置的“备份全部 / 导入”功能。把整个软件文件夹复制一份就是完整备份。</p>
         </details>
         <details>
-          <summary>AI 功能怎么用？要额外花钱吗？</summary>
-          <p>在 AI 助手设置里填入你自己的 API Key 即可。费用由对应 AI 服务商按用量收取，与三叶草无关；不填 Key 也能正常当记事本用。</p>
+          <summary data-i18n="faq.q2">AI 功能怎么用？要额外花钱吗？</summary>
+          <p data-i18n="faq.a2">在「AI 助手 → AI 设置」里填入你自己的 API Key 即可，支持 DeepSeek、豆包、GLM、ChatGPT、千问。费用由对应服务商按用量收取，与三叶草无关；不填 Key 也能正常当记事本使用。</p>
         </details>
         <details>
-          <summary>新建/重命名时输入框突然打不出字怎么办？</summary>
-          <p>偶尔会遇到输入法尚未就位的情况，直接关闭软件重新打开即可，笔记不会丢失。</p>
+          <summary data-i18n="faq.q3">新建/重命名时输入框突然打不出字怎么办？</summary>
+          <p data-i18n="faq.a3">偶尔会遇到输入法尚未就位的情况，直接关闭软件重新打开即可，笔记不会丢失。</p>
         </details>
         <details>
-          <summary>为什么激活码换电脑不能用？</summary>
-          <p>激活码绑定单台电脑的硬件信息，用于防止拷贝转卖。换电脑后联系作者，提供新机器码即可免费重新激活一次。</p>
+          <summary data-i18n="faq.q4">为什么激活码换电脑不能用？</summary>
+          <p data-i18n="faq.a4">激活码绑定单台电脑的硬件信息，用于防止拷贝转卖。换电脑后联系作者，提供新机器码即可重新激活。</p>
         </details>
         <details>
-          <summary>有手机版吗？</summary>
-          <p>目前只有 Windows 电脑版；安卓 / iOS 版本正在规划中，上线后会在这里和软件内同步公告。</p>
+          <summary data-i18n="faq.q5">以后更新要重新付费吗？</summary>
+          <p data-i18n="faq.a5">不用。当前版本为一次性买断，后续 Windows 电脑版更新免费，软件内会自动提醒并更新。</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q6">有手机版吗？</summary>
+          <p data-i18n="faq.a6">目前只有 Windows 电脑版；安卓 / iOS 正在规划中，上线后会在这里和软件内同步公告。</p>
         </details>
       </div>
     </div>
@@ -251,11 +279,226 @@
 
 <footer>
   <div class="wrap">
-    <div>三叶草 · 本地笔记与 AI 工作台</div>
-    <div class="mini">© 2026 三叶草 · 数据存储在本机，密钥加密保存，无日志回传</div>
-    <div class="mini">软件内检查更新入口已预留 · 官网由作者自建</div>
+    <div data-i18n="footer.l1">三叶草 · 本地笔记与 AI 工作台</div>
+    <div class="mini" data-i18n="footer.l2">© 2026 三叶草 · 数据存储在本机，密钥加密保存，无日志回传</div>
+    <div class="mini" data-i18n="footer.l3">官网由作者自建 · 软件内检查更新已预留</div>
   </div>
 </footer>
+
+<script>
+var I18N = {
+  "zh-CN": {
+    title: "三叶草 · 本地笔记与 AI 工作台",
+    metaDesc: "三叶草：本地优先的记事本，内置可切换的多家 AI 助手，支持三语界面、特色纸面笔记与桌面小精灵。",
+    "nav.features": "功能", "nav.download": "下载购买", "nav.changelog": "更新日志", "nav.faq": "常见问题",
+    "hero.badge": "本地优先 · 数据只存在你自己电脑里",
+    "hero.h1": "三叶草 · <span>Clover</span>",
+    "hero.sub": "一款安静、好用的 Windows 记事本：普通笔记、五种特色纸面、桌面小精灵，再内置可随时切换的 AI 助手——支持 DeepSeek、豆包、GLM、ChatGPT、千问。",
+    "btn.download": "下载体验", "btn.features": "看看功能",
+    "shot.mainAlt": "三叶草主界面截图",
+    "shot.featAlt": "特色纸面笔记与 AI 助手",
+    "shot.setAlt": "英文界面与设置",
+    "shot.featureCap": "特色纸面笔记 + AI 助手",
+    "shot.settingsCap": "英文界面 · 三语一键切换",
+    "feat.title": "它能帮你做什么",
+    "feat.lead": "从随手记录到让 AI 参与思考，一个软件就够了。",
+    "f1t": "本地记事本", "f1p": "自动保存、标题搜索、置顶、碎纸机与批量删除、文字上色与插图；笔记以本地文件保存，随时备份不丢失。",
+    "f2t": "内置多 AI", "f2p": "DeepSeek、豆包、GLM、ChatGPT、千问自由切换，模型可选或自定义；每篇笔记独立对话记忆，聊天可一键存为笔记。",
+    "f3t": "特色纸面", "f3p": "星光、扑克、小清新、粉泡泡、浪花五种主题纸；每日签到赚三叶草币解锁，赞助码也能兑换。",
+    "f4t": "桌面小精灵", "f4p": "三叶草小精灵住在桌面陪你：可拖拽、有专属小功能，还能设置随软件一起启动。",
+    "f5t": "三语界面", "f5p": "简体中文、English、繁體中文完整翻译，设置里一键切换，帮助与设置同样全量翻译。",
+    "f6t": "隐私与授权", "f6p": "API Key 只在本机加密保存、无日志回传；激活码一机一码并绑定硬件，防止拷贝转卖。",
+    "download.title": "下载与购买",
+    "download.lead": "一个版本，买断即用；目前支持 Windows 电脑，安卓 / iOS 正在规划中。",
+    "plan.name": "三叶草 · Windows 版",
+    "plan.priceHtml": "¥19.9<small> / 一次性买断</small>",
+    "plan.li1": "一码一机，永久使用", "plan.li2": "后续电脑版更新免费", "plan.li3": "软件内自动更新，不用手动换包",
+    "plan.li4": "数据 100% 存在自己电脑里", "plan.li5": "联系作者获取激活码，可远程协助安装",
+    "plan.btn": "联系作者购买",
+    "download.note": "联系方式与正式下载链接开售后公布；手机版上线后会另行公告。",
+    "log.title": "更新日志",
+    "log.lead": "软件内点击“帮助 → 检查更新”即可收到新版提示。",
+    "log.v230": "v2.3.0",
+    "log.l230_1": "三语界面全量完善：简中 / English / 繁體，设置里一键切换",
+    "log.l230_2": "AI 助手升级：五家服务商、模型下拉选择或自定义、每篇笔记独立对话、一键存为笔记",
+    "log.l230_3": "五种特色纸面：星光 / 扑克 / 小清新 / 粉泡泡 / 浪花",
+    "log.l230_4": "三叶草币体系：每日签到 +20、赞助码兑换、防篡改签名",
+    "log.l230_5": "笔记管理完善：多篇置顶、碎纸机、大型碎纸机批量删除、文字上色、插图、备份 / 导入",
+    "log.l230_6": "桌面小精灵：拖拽与互动、快捷小功能、可设置随软件启动",
+    "log.l230_7": "设置升级：语言 / 字号 / 字体 / 深浅主题 / 窗口与全屏，保存后生效",
+    "log.l230_8": "离线加固：多因子机器码、激活码一机一码、程序文件自检，防拷贝转卖",
+    "log.v22": "v2.2.x",
+    "log.l22_1": "本地笔记：自动保存、标题搜索、置顶与删除",
+    "log.l22_2": "初代特色纸面与桌面小精灵、三叶草币签到",
+    "log.l22_3": "AI 助手接入多家服务商，分笔记独立对话",
+    "faq.title": "常见问题",
+    "faq.q1": "我的笔记存在哪里？会不会丢？",
+    "faq.a1": "所有笔记都以文件形式保存在软件旁的「笔记」文件夹里，随时可以整文件夹备份，或使用软件内置的“备份全部 / 导入”功能。把整个软件文件夹复制一份就是完整备份。",
+    "faq.q2": "AI 功能怎么用？要额外花钱吗？",
+    "faq.a2": "在「AI 助手 → AI 设置」里填入你自己的 API Key 即可，支持 DeepSeek、豆包、GLM、ChatGPT、千问。费用由对应服务商按用量收取，与三叶草无关；不填 Key 也能正常当记事本使用。",
+    "faq.q3": "新建/重命名时输入框突然打不出字怎么办？",
+    "faq.a3": "偶尔会遇到输入法尚未就位的情况，直接关闭软件重新打开即可，笔记不会丢失。",
+    "faq.q4": "为什么激活码换电脑不能用？",
+    "faq.a4": "激活码绑定单台电脑的硬件信息，用于防止拷贝转卖。换电脑后联系作者，提供新机器码即可重新激活。",
+    "faq.q5": "以后更新要重新付费吗？",
+    "faq.a5": "不用。当前版本为一次性买断，后续 Windows 电脑版更新免费，软件内会自动提醒并更新。",
+    "faq.q6": "有手机版吗？",
+    "faq.a6": "目前只有 Windows 电脑版；安卓 / iOS 正在规划中，上线后会在这里和软件内同步公告。",
+    "footer.l1": "三叶草 · 本地笔记与 AI 工作台",
+    "footer.l2": "© 2026 三叶草 · 数据存储在本机，密钥加密保存，无日志回传",
+    "footer.l3": "官网由作者自建 · 软件内检查更新已预留"
+  },
+  "en": {
+    title: "Clover · Local Notes & AI Workbench",
+    metaDesc: "Clover — a local-first Windows notebook with built-in AI (DeepSeek, Doubao, GLM, ChatGPT, Qwen), five themed papers, a trilingual UI and a desktop pet.",
+    "nav.features": "Features", "nav.download": "Download", "nav.changelog": "Changelog", "nav.faq": "FAQ",
+    "hero.badge": "Local-first · Your data stays on your PC",
+    "hero.h1": "Clover · <span>三叶草</span>",
+    "hero.sub": "A quiet, friendly Windows notebook: plain notes, five themed papers, a desktop pet, and built-in AI you can switch anytime — DeepSeek, Doubao, GLM, ChatGPT and Qwen.",
+    "btn.download": "Get it now", "btn.features": "See features",
+    "shot.mainAlt": "Clover main window",
+    "shot.featAlt": "Themed paper note with AI assistant",
+    "shot.setAlt": "English UI and settings",
+    "shot.featureCap": "Themed paper + AI assistant",
+    "shot.settingsCap": "English UI · switch among three languages",
+    "feat.title": "What it can do for you",
+    "feat.lead": "From quick jotting to thinking with AI — one app is enough.",
+    "f1t": "Local notebook", "f1p": "Auto-save, title search, pinning, shredding and batch delete, text colors and images. Notes are local files — easy to back up, never locked away.",
+    "f2t": "Built-in multi AI", "f2p": "Switch freely between DeepSeek, Doubao, GLM, ChatGPT and Qwen; pick or customize models. Each note keeps its own chat memory, and chats can be saved as notes in one click.",
+    "f3t": "Themed paper", "f3p": "Five special papers: Starry, Poker, Fresh, Bubble and Wave. Check in daily for Clover Coins, or redeem sponsor codes.",
+    "f4t": "Desktop pet", "f4p": "A little Clover sprite lives on your desktop: draggable, with its own quick actions, and it can start together with the app.",
+    "f5t": "Trilingual UI", "f5p": "Simplified Chinese, English and Traditional Chinese — fully translated, switchable in Settings, including Help.",
+    "f6t": "Privacy & license", "f6p": "API keys are encrypted and stay on this PC; no logs are sent out. Each activation code is bound to one machine to prevent copying and resale.",
+    "download.title": "Download & purchase",
+    "download.lead": "One version, buy once and own it. Currently for Windows; Android / iOS is on the way.",
+    "plan.name": "Clover · Windows",
+    "plan.priceHtml": "¥19.9<small> / one-time</small>",
+    "plan.li1": "One code per machine, lifetime use", "plan.li2": "Free Windows updates", "plan.li3": "In-app auto update — no manual replacement",
+    "plan.li4": "100% of your data stays on your PC", "plan.li5": "Contact the author for the activation code and remote setup help",
+    "plan.btn": "Contact to buy",
+    "download.note": "Contact and download links will be published when sales open; mobile versions will be announced here and in-app.",
+    "log.title": "Changelog",
+    "log.lead": "In-app: Help → Check for updates to see the newest version.",
+    "log.v230": "v2.3.0",
+    "log.l230_1": "Complete trilingual UI: Simplified Chinese / English / Traditional Chinese, one-click switch in Settings",
+    "log.l230_2": "AI upgrade: five providers, model picker or custom models, per-note chat memory, save chat as note",
+    "log.l230_3": "Five themed papers: Starry / Poker / Fresh / Bubble / Wave",
+    "log.l230_4": "Clover Coin system: daily check-in +20, sponsor code redemption, tamper-proof signatures",
+    "log.l230_5": "Notes management: multi-pin, shredder, batch shredder, text colors, images, backup / import",
+    "log.l230_6": "Desktop pet: drag & interact, quick actions, optional auto-start with the app",
+    "log.l230_7": "Settings upgrade: language / font size / font / dark-light theme / window & fullscreen, applies after save",
+    "log.l230_8": "Offline hardening: multi-factor machine code, one-machine-one-code license, program self-check",
+    "log.v22": "v2.2.x",
+    "log.l22_1": "Local notes: auto-save, title search, pin & delete",
+    "log.l22_2": "First themed papers, desktop pet and Clover Coin check-in",
+    "log.l22_3": "AI assistant with multiple providers and per-note chats",
+    "faq.title": "FAQ",
+    "faq.q1": "Where are my notes stored? Can I lose them?",
+    "faq.a1": "All notes are saved as files in the “Notes” folder next to the app. You can back up the whole folder anytime, or use the built-in “Back up all / Import” features. Copying the whole app folder is a complete backup.",
+    "faq.q2": "How do I use the AI? Does it cost extra?",
+    "faq.a2": "Open AI Assistant → AI Settings and paste your own API key. DeepSeek, Doubao, GLM, ChatGPT and Qwen are supported. Usage is billed by that provider and has nothing to do with Clover; without a key it still works perfectly as a notebook.",
+    "faq.q3": "What if I cannot type in the new/rename input box?",
+    "faq.a3": "It is usually an input method that has not finished loading. Close the app and reopen it — your notes are safe.",
+    "faq.q4": "Why does my activation code not work on another PC?",
+    "faq.a4": "Each code is bound to the hardware of one machine to prevent copying and resale. If you change computers, contact the author with your new machine code to reactivate.",
+    "faq.q5": "Will I have to pay again for future updates?",
+    "faq.a5": "No. This is a one-time purchase; future Windows updates are free and the app will remind and update itself automatically.",
+    "faq.q6": "Is there a mobile version?",
+    "faq.a6": "Currently Windows only. Android / iOS versions are planned and will be announced here and in-app.",
+    "footer.l1": "Clover · Local Notes & AI Workbench",
+    "footer.l2": "© 2026 Clover · Data stays local, keys are encrypted, no logs are sent out",
+    "footer.l3": "Official site built by the author · in-app update check reserved"
+  },
+  "zh-TW": {
+    title: "三葉草 · 本機筆記與 AI 工作台",
+    metaDesc: "三葉草：本機優先的記事本，內建可切換的多家 AI 助手，支援三語介面、特色紙面筆記與桌面小精靈。",
+    "nav.features": "功能", "nav.download": "下載購買", "nav.changelog": "更新日誌", "nav.faq": "常見問題",
+    "hero.badge": "本機優先 · 資料只存在你自己的電腦裡",
+    "hero.h1": "三葉草 · <span>Clover</span>",
+    "hero.sub": "一款安靜、好用的 Windows 記事本：普通筆記、五種特色紙面、桌面小精靈，再內建可隨時切換的 AI 助手——支援 DeepSeek、豆包、GLM、ChatGPT、千問。",
+    "btn.download": "下載體驗", "btn.features": "看看功能",
+    "shot.mainAlt": "三葉草主介面截圖",
+    "shot.featAlt": "特色紙面筆記與 AI 助手",
+    "shot.setAlt": "英文介面與設定",
+    "shot.featureCap": "特色紙面筆記 + AI 助手",
+    "shot.settingsCap": "英文介面 · 三語一鍵切換",
+    "feat.title": "它能幫你做什麼",
+    "feat.lead": "從隨手記錄到讓 AI 參與思考，一個軟體就夠了。",
+    "f1t": "本機記事本", "f1p": "自動儲存、標題搜尋、置頂、碎紙機與批次刪除、文字上色與插圖；筆記以本機檔案儲存，隨時備份不遺失。",
+    "f2t": "內建多 AI", "f2p": "DeepSeek、豆包、GLM、ChatGPT、千問自由切換，模型可選或自訂；每篇筆記獨立對話記憶，聊天可一鍵存成筆記。",
+    "f3t": "特色紙面", "f3p": "星光、撲克、小清新、粉泡泡、浪花五種主題紙；每日簽到賺三葉草幣解鎖，贊助碼也能兌換。",
+    "f4t": "桌面小精靈", "f4p": "三葉草小精靈住在桌面陪你：可拖曳、有專屬小功能，還能設定隨軟體一起啟動。",
+    "f5t": "三語介面", "f5p": "简体中文、English、繁體中文完整翻譯，設定裡一鍵切換，說明與設定同樣全量翻譯。",
+    "f6t": "隱私與授權", "f6p": "API Key 只在本機加密儲存、無日誌回傳；激活碼一機一碼並綁定硬體，防止拷貝轉賣。",
+    "download.title": "下載與購買",
+    "download.lead": "一個版本，買斷即用；目前支援 Windows 電腦，安卓 / iOS 正在規劃中。",
+    "plan.name": "三葉草 · Windows 版",
+    "plan.priceHtml": "¥19.9<small> / 一次性買斷</small>",
+    "plan.li1": "一碼一機，永久使用", "plan.li2": "後續電腦版更新免費", "plan.li3": "軟體內自動更新，不用手動換包",
+    "plan.li4": "資料 100% 存在自己電腦裡", "plan.li5": "聯絡作者取得激活碼，可遠端協助安裝",
+    "plan.btn": "聯絡作者購買",
+    "download.note": "聯絡方式與正式下載連結開售後公布；手機版上線後會另行公告。",
+    "log.title": "更新日誌",
+    "log.lead": "軟體內點「說明 → 檢查更新」即可收到新版提示。",
+    "log.v230": "v2.3.0",
+    "log.l230_1": "三語介面全量完善：簡中 / English / 繁體，設定裡一鍵切換",
+    "log.l230_2": "AI 助手升級：五家服務商、模型下拉選擇或自訂、每篇筆記獨立對話、一鍵存成筆記",
+    "log.l230_3": "五種特色紙面：星光 / 撲克 / 小清新 / 粉泡泡 / 浪花",
+    "log.l230_4": "三葉草幣體系：每日簽到 +20、贊助碼兌換、防竄改簽名",
+    "log.l230_5": "筆記管理完善：多篇置頂、碎紙機、大型碎紙機批次刪除、文字上色、插圖、備份 / 匯入",
+    "log.l230_6": "桌面小精靈：拖曳與互動、快捷小功能、可設定隨軟體啟動",
+    "log.l230_7": "設定升級：語言 / 字號 / 字型 / 深淺主題 / 視窗與全螢幕，儲存後生效",
+    "log.l230_8": "離線加固：多因子機器碼、激活碼一機一碼、程式檔案自檢，防拷貝轉賣",
+    "log.v22": "v2.2.x",
+    "log.l22_1": "本機筆記：自動儲存、標題搜尋、置頂與刪除",
+    "log.l22_2": "初代特色紙面與桌面小精靈、三葉草幣簽到",
+    "log.l22_3": "AI 助手接入多家服務商，分筆記獨立對話",
+    "faq.title": "常見問題",
+    "faq.q1": "我的筆記存在哪裡？會不會弄丟？",
+    "faq.a1": "所有筆記都以檔案形式儲存在軟體旁的「筆記」資料夾裡，隨時可以整個資料夾備份，或使用軟體內建的「備份全部 / 匯入」功能。把整個軟體資料夾複製一份就是完整備份。",
+    "faq.q2": "AI 功能怎麼用？要額外花錢嗎？",
+    "faq.a2": "在「AI 助手 → AI 設定」填入你自己的 API Key 即可，支援 DeepSeek、豆包、GLM、ChatGPT、千問。費用由對應服務商按用量收取，與三葉草無關；不填 Key 也能正常當記事本使用。",
+    "faq.q3": "新增/重新命名時輸入框突然打不出字怎麼辦？",
+    "faq.a3": "偶爾會遇到輸入法尚未就位的情況，直接關閉軟體重新開啟即可，筆記不會遺失。",
+    "faq.q4": "為什麼激活碼換電腦不能用？",
+    "faq.a4": "激活碼綁定單台電腦的硬體資訊，用於防止拷貝轉賣。換電腦後聯絡作者，提供新機器碼即可重新激活。",
+    "faq.q5": "以後更新要重新付費嗎？",
+    "faq.a5": "不用。目前版本為一次性買斷，後續 Windows 電腦版更新免費，軟體內會自動提醒並更新。",
+    "faq.q6": "有手機版嗎？",
+    "faq.a6": "目前只有 Windows 電腦版；安卓 / iOS 正在規劃中，上線後會在這裡和軟體內同步公告。",
+    "footer.l1": "三葉草 · 本機筆記與 AI 工作台",
+    "footer.l2": "© 2026 三葉草 · 資料存放在本機，金鑰加密儲存，無日誌回傳",
+    "footer.l3": "官網由作者自建 · 軟體內檢查更新已預留"
+  }
+};
+
+var currentLang = "zh-CN";
+function applyLang(lang) {
+  currentLang = lang;
+  var dict = I18N[lang] || I18N["zh-CN"];
+  document.documentElement.lang = lang;
+  document.title = dict.title;
+  var meta = document.querySelector('meta[name="description"]');
+  if (meta) meta.content = dict.metaDesc;
+  document.querySelectorAll("[data-i18n]").forEach(function (el) {
+    var key = el.getAttribute("data-i18n");
+    if (dict[key]) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll("img[data-alt]").forEach(function (img) {
+    img.alt = dict[img.getAttribute("data-alt")] || "";
+  });
+  document.getElementById("langZh").className = lang === "zh-CN" ? "on" : "";
+  document.getElementById("langEn").className = lang === "en" ? "on" : "";
+  document.getElementById("langTw").className = lang === "zh-TW" ? "on" : "";
+  try { localStorage.setItem("clover_site_lang", lang); } catch (e) {}
+}
+function setLang(lang) { applyLang(lang); }
+(function () {
+  var saved = "zh-CN";
+  try { saved = localStorage.getItem("clover_site_lang") || "zh-CN"; } catch (e) {}
+  applyLang(saved === "en" || saved === "zh-TW" ? saved : "zh-CN");
+})();
+</script>
 
 </body>
 </html>
