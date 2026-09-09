@@ -1,0 +1,6 @@
+{
+  "version": "2.3.0",
+  "note": "当前正式版本",
+  "url": "https://你的官网地址/update/app-2.3.0.asar",
+  "sha256": "把新版 app.asar 的 SHA256 填到这里"
+}

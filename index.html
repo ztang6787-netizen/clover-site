@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三叶草 · 本地笔记与 AI 工作台</title>
+<link rel="icon" type="image/png" href="assets/icon.png">
+<meta name="description" content="三叶草：本地优先的记事本，内置可切换的多家 AI 助手，支持三语界面、特色纸面笔记与桌面小精灵。">
+<style>
+  :root {
+    --bg: #0b1424;
+    --bg2: #0f1b31;
+    --panel: #131f36;
+    --line: #26334d;
+    --text: #e6edf7;
+    --muted: #8fa3bd;
+    --accent: #9ecbff;
+    --green: #43c86f;
+    --gold: #f0c674;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    background: radial-gradient(1200px 600px at 80% -10%, #17314f 0%, var(--bg) 55%) fixed, var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+
+  /* 顶栏 */
+  header {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(11, 20, 36, .85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav { display: flex; align-items: center; gap: 22px; height: 62px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 1px; }
+  .logo img { width: 30px; height: 30px; border-radius: 7px; }
+  nav .links { margin-left: auto; display: flex; gap: 18px; font-size: 14px; }
+  nav .links a { color: var(--muted); }
+  nav .links a:hover { color: var(--text); }
+
+  /* Hero */
+  .hero { padding: 92px 0 70px; text-align: center; }
+  .hero .badge {
+    display: inline-block; font-size: 13px; color: var(--green);
+    border: 1px solid rgba(67, 200, 111, .4); background: rgba(67, 200, 111, .08);
+    padding: 4px 12px; border-radius: 999px; margin-bottom: 20px;
+  }
+  .hero h1 { font-size: 46px; letter-spacing: 2px; }
+  .hero h1 span { color: var(--green); }
+  .hero .sub { margin: 16px auto 30px; max-width: 640px; color: var(--muted); font-size: 17px; }
+  .btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 11px 24px; border-radius: 10px; font-weight: 700;
+    border: 1px solid var(--line); background: var(--panel); color: var(--text);
+    transition: .2s;
+  }
+  .btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+  .btn.primary { background: linear-gradient(180deg, #1f8a4c, #166e3a); border-color: #2aa15c; }
+  .btn.ghost { background: transparent; }
+
+  /* 截图 */
+  .shots { padding: 20px 0 70px; }
+  .shot-main {
+    border-radius: 16px; overflow: hidden; border: 1px solid var(--line);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .5);
+  }
+  .shot-main img { display: block; width: 100%; }
+  .shot-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+  .shot-row figure { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+  .shot-row img { display: block; width: 100%; }
+  figcaption { padding: 10px 14px; font-size: 13px; color: var(--muted); background: var(--bg2); }
+
+  /* 区块通用 */
+  section { padding: 64px 0; }
+  section h2 { text-align: center; font-size: 30px; letter-spacing: 1px; margin-bottom: 12px; }
+  section .lead { text-align: center; color: var(--muted); max-width: 640px; margin: 0 auto 40px; }
+
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    padding: 22px; transition: .2s;
+  }
+  .card:hover { border-color: rgba(158, 203, 255, .5); transform: translateY(-2px); }
+  .card .ico { font-size: 26px; }
+  .card h3 { margin: 12px 0 8px; font-size: 17px; }
+  .card p { color: var(--muted); font-size: 14px; }
+
+  /* 下载/购买 */
+  .buy-grid { display: grid; grid-template-columns: minmax(320px, 560px); justify-content: center; gap: 18px; }
+  .plan { background: linear-gradient(180deg, #15233d, #101b2e); border: 1px solid var(--line); border-radius: 16px; padding: 26px; }
+  .plan.hot { border-color: rgba(240, 198, 116, .55); }
+  .plan h3 { font-size: 20px; }
+  .plan .price { font-size: 34px; margin: 12px 0 4px; color: var(--gold); }
+  .plan .price small { font-size: 14px; color: var(--muted); }
+  .plan ul { margin: 16px 0 22px; list-style: none; }
+  .plan li { padding: 5px 0 5px 24px; position: relative; color: var(--muted); font-size: 14px; }
+  .plan li::before { content: "✓"; position: absolute; left: 0; color: var(--green); }
+  .plan .btn { width: 100%; text-align: center; }
+
+  /* 更新日志 */
+  .log { max-width: 720px; margin: 0 auto; }
+  .log .ver { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .log .tag { flex: 0 0 130px; font-weight: 700; color: var(--gold); }
+  .log ul { padding-left: 18px; color: var(--muted); font-size: 14px; }
+
+  /* FAQ */
+  .faq { max-width: 760px; margin: 0 auto; }
+  details {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 4px 18px; margin-bottom: 12px;
+  }
+  summary { padding: 12px 0; cursor: pointer; font-weight: 700; }
+  details p { color: var(--muted); padding: 0 0 14px; font-size: 14px; }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 34px 0 44px;
+    text-align: center; color: var(--muted); font-size: 13px;
+  }
+  footer .mini { margin-top: 8px; opacity: .7; }
+
+  @media (max-width: 860px) {
+    .features { grid-template-columns: 1fr 1fr; }
+    .shot-row, .buy-grid { grid-template-columns: 1fr; }
+    nav .links { display: none; }
+    .hero h1 { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="logo"><img src="assets/icon.png" alt="三叶草"><span>三叶草</span></div>
+      <div class="links">
+        <a href="#features">功能</a>
+        <a href="#download">下载购买</a>
+        <a href="#changelog">更新日志</a>
+        <a href="#faq">常见问题</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <span class="badge">本地优先 · 数据只存在你自己电脑里</span>
+      <h1>三叶草 · <span>Clover</span></h1>
+      <p class="sub">一款安静、好用的 Windows 记事本：普通笔记、星光纸面、桌面小精灵，再内置可随时切换的 AI 助手——支持 DeepSeek、豆包、GLM、ChatGPT、千问。</p>
+      <div class="btns">
+        <a class="btn primary" href="#download">下载体验</a>
+        <a class="btn ghost" href="#features">看看功能</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="shots">
+    <div class="wrap">
+      <div class="shot-main">
+        <img src="assets/shot-main.png" alt="三叶草主界面截图">
+      </div>
+      <div class="shot-row">
+        <figure><img src="assets/shot-feature.png" alt="特色纸面笔记与 AI 助手"><figcaption>特色纸面笔记 + AI 助手</figcaption></figure>
+        <figure><img src="assets/shot-settings.png" alt="多语言与外观设置"><figcaption>三语界面 · 深色/浅色 · 一键备份</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <h2>它能帮你做什么</h2>
+      <p class="lead">从随手记录到让 AI 参与思考，一个软件就够了。</p>
+      <div class="features">
+        <div class="card"><div class="ico">📝</div><h3>本地记事本</h3><p>自动保存、搜索、置顶、碎纸机批量删除、文字上色与插图，笔记以文件形式存在你电脑里，随时可备份。</p></div>
+        <div class="card"><div class="ico">✦</div><h3>内置多 AI</h3><p>DeepSeek、豆包、GLM、ChatGPT、千问自由切换，每篇笔记拥有独立对话记忆，也可以一键把聊天存成笔记。</p></div>
+        <div class="card"><div class="ico">🎨</div><h3>特色纸面</h3><p>星光、扑克、小清新、粉泡泡、浪花五种主题纸，记录也能有氛围感；每日签到赚三叶草币解锁。</p></div>
+        <div class="card"><div class="ico">☘</div><h3>桌面小精灵</h3><p>一只三叶草小精灵可以住在桌面陪你，支持拖拽与简单互动，可设置开机自动召唤。</p></div>
+        <div class="card"><div class="ico">🌍</div><h3>三语界面</h3><p>简体中文、English、繁體中文一键切换，连帮助和设置都完整翻译。</p></div>
+        <div class="card"><div class="ico">🔐</div><h3>隐私与授权</h3><p>API Key 加密保存在本机、无日志回传；激活码绑定单台电脑，防止拷贝转卖。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" style="background: rgba(15,27,49,.45);">
+    <div class="wrap">
+      <h2>下载与购买</h2>
+      <p class="lead">一个版本，买断即用；目前仅支持 Windows 电脑，安卓 / iOS 版正在规划中。</p>
+      <div class="buy-grid">
+        <div class="plan hot">
+          <h3>三叶草 · Windows 版</h3>
+          <div class="price">¥19.9<small> / 一次性买断</small></div>
+          <ul>
+            <li>一码一机，永久使用</li>
+            <li>后续电脑版更新免费</li>
+            <li>软件内自动更新，不用手动换包</li>
+            <li>数据 100% 存在自己电脑里</li>
+            <li>联系作者获取激活码，可远程协助安装</li>
+          </ul>
+          <a class="btn primary" href="mailto:your-email@example.com?subject=购买三叶草正式版">联系购买</a>
+        </div>
+      </div>
+      <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:18px">* 联系方式上线前会更新；手机版上线后会另行公告。</p>
+    </div>
+  </section>
+
+  <section id="changelog">
+    <div class="wrap">
+      <h2>更新日志</h2>
+      <p class="lead">软件内点击“帮助 → 检查更新”即可收到新版提示。</p>
+      <div class="log">
+        <div class="ver"><div class="tag">v2.3.0</div><ul><li>三语界面完善，帮助中心显示版本与日期</li><li>修复特色笔记打开 AI 助手被背景遮挡的问题</li><li>优化新建/重命名输入框的输入法兼容性</li><li>离线加固：代码混淆打包 + 多因子机器码 + 文件自检</li></ul></div>
+        <div class="ver"><div class="tag">v2.2.x</div><ul><li>新增星光、扑克等五种特色纸面笔记</li><li>新增桌面小精灵与三叶草币签到体系</li><li>AI 助手支持多家服务商切换与分笔记记忆</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="background: rgba(15,27,49,.45);">
+    <div class="wrap">
+      <h2>常见问题</h2>
+      <div class="faq">
+        <details open>
+          <summary>我的笔记存在哪里？会不会丢？</summary>
+          <p>所有笔记都以 HTML 文件保存在软件旁的「笔记」文件夹里，随时可以整文件夹备份或使用软件内置备份功能。复制整个软件文件夹就是完整备份。</p>
+        </details>
+        <details>
+          <summary>AI 功能怎么用？要额外花钱吗？</summary>
+          <p>在 AI 助手设置里填入你自己的 API Key 即可。费用由对应 AI 服务商按用量收取，与三叶草无关；不填 Key 也能正常当记事本用。</p>
+        </details>
+        <details>
+          <summary>新建/重命名时输入框突然打不出字怎么办？</summary>
+          <p>偶尔会遇到输入法尚未就位的情况，直接关闭软件重新打开即可，笔记不会丢失。</p>
+        </details>
+        <details>
+          <summary>为什么激活码换电脑不能用？</summary>
+          <p>激活码绑定单台电脑的硬件信息，用于防止拷贝转卖。换电脑后联系作者，提供新机器码即可免费重新激活一次。</p>
+        </details>
+        <details>
+          <summary>有手机版吗？</summary>
+          <p>目前只有 Windows 电脑版；安卓 / iOS 版本正在规划中，上线后会在这里和软件内同步公告。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>三叶草 · 本地笔记与 AI 工作台</div>
+    <div class="mini">© 2026 三叶草 · 数据存储在本机，密钥加密保存，无日志回传</div>
+    <div class="mini">软件内检查更新入口已预留 · 官网由作者自建</div>
+  </div>
+</footer>
+
+</body>
+</html>
