@@ -213,10 +213,14 @@
             <li data-i18n="plan.li4">数据 100% 存在自己电脑里</li>
             <li data-i18n="plan.li5">联系作者获取激活码，可远程协助安装</li>
           </ul>
-          <a class="btn primary" id="contactBtn" href="mailto:your-email@example.com?subject=购买三叶草正式版" data-i18n="plan.btn">联系作者购买</a>
+          <a class="btn primary" id="contactBtn" href="mailto:3980679105@qq.com?subject=购买三叶草正式版" data-i18n="plan.btn">联系作者购买</a>
+          <div style="text-align:center;margin-top:12px;color:var(--muted);font-size:13px">
+            <span data-i18n="plan.contactLabel">联系方式</span>：<b id="qqNum" title="点击复制" style="color:var(--gold);font-size:16px;cursor:pointer;letter-spacing:.5px">3980679105</b>
+            <div style="margin-top:4px" data-i18n="plan.contactHint">（QQ 号，点击可复制）</div>
+          </div>
         </div>
       </div>
-      <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:18px" data-i18n="download.note">联系方式与正式下载链接开售后公布；手机版上线后会另行公告。</p>
+      <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:18px" data-i18n="download.note">购买与激活请联系 QQ 3980679105；手机版上线后会另行公告。</p>
     </div>
   </section>
 
@@ -315,7 +319,8 @@ var I18N = {
     "plan.li1": "一码一机，永久使用", "plan.li2": "后续电脑版更新免费", "plan.li3": "软件内自动更新，不用手动换包",
     "plan.li4": "数据 100% 存在自己电脑里", "plan.li5": "联系作者获取激活码，可远程协助安装",
     "plan.btn": "联系作者购买",
-    "download.note": "联系方式与正式下载链接开售后公布；手机版上线后会另行公告。",
+    "plan.contactLabel": "联系方式", "plan.contactHint": "（QQ 号，点击可复制）",
+    "download.note": "购买与激活请联系 QQ 3980679105；手机版上线后会另行公告。",
     "log.title": "更新日志",
     "log.lead": "软件内点击“帮助 → 检查更新”即可收到新版提示。",
     "log.v230": "v2.3.0",
@@ -376,7 +381,8 @@ var I18N = {
     "plan.li1": "One code per machine, lifetime use", "plan.li2": "Free Windows updates", "plan.li3": "In-app auto update — no manual replacement",
     "plan.li4": "100% of your data stays on your PC", "plan.li5": "Contact the author for the activation code and remote setup help",
     "plan.btn": "Contact to buy",
-    "download.note": "Contact and download links will be published when sales open; mobile versions will be announced here and in-app.",
+    "plan.contactLabel": "Contact", "plan.contactHint": "(QQ ID — click to copy)",
+    "download.note": "To buy or activate, contact QQ 3980679105; mobile versions will be announced here and in-app.",
     "log.title": "Changelog",
     "log.lead": "In-app: Help → Check for updates to see the newest version.",
     "log.v230": "v2.3.0",
@@ -437,7 +443,8 @@ var I18N = {
     "plan.li1": "一碼一機，永久使用", "plan.li2": "後續電腦版更新免費", "plan.li3": "軟體內自動更新，不用手動換包",
     "plan.li4": "資料 100% 存在自己電腦裡", "plan.li5": "聯絡作者取得激活碼，可遠端協助安裝",
     "plan.btn": "聯絡作者購買",
-    "download.note": "聯絡方式與正式下載連結開售後公布；手機版上線後會另行公告。",
+    "plan.contactLabel": "聯絡方式", "plan.contactHint": "（QQ 號，點擊可複製）",
+    "download.note": "購買與激活請聯絡 QQ 3980679105；手機版上線後會另行公告。",
     "log.title": "更新日誌",
     "log.lead": "軟體內點「說明 → 檢查更新」即可收到新版提示。",
     "log.v230": "v2.3.0",
@@ -497,6 +504,31 @@ function setLang(lang) { applyLang(lang); }
   var saved = "zh-CN";
   try { saved = localStorage.getItem("clover_site_lang") || "zh-CN"; } catch (e) {}
   applyLang(saved === "en" || saved === "zh-TW" ? saved : "zh-CN");
+})();
+(function () {
+  var qq = document.getElementById("qqNum");
+  if (!qq) return;
+  qq.addEventListener("click", function () {
+    var text = "3980679105";
+    var flash = function () {
+      var old = qq.textContent;
+      qq.textContent = "✔ " + text;
+      setTimeout(function () { qq.textContent = old; }, 1500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(flash, flash);
+    } else {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      } catch (e) {}
+      flash();
+    }
+  });
 })();
 </script>
 
