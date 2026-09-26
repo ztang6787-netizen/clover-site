@@ -58,7 +58,9 @@
   }
   .hero h1 { font-size: 46px; letter-spacing: 2px; }
   .hero h1 span { color: var(--green); }
-  .hero .sub { margin: 16px auto 30px; max-width: 680px; color: var(--muted); font-size: 17px; }
+  .hero .sub { margin: 16px auto 28px; max-width: 720px; color: var(--muted); font-size: 16.5px; line-height: 1.85; }
+  .hero .sub .sub-lead { display: block; font-size: 19px; font-weight: 700; color: #eaf4ec; margin-bottom: 10px; letter-spacing: .2px; }
+  .hero .sub .sub-end { display: block; margin-top: 12px; color: var(--green); font-weight: 600; }
   .btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
   .btn {
     display: inline-block; padding: 11px 24px; border-radius: 10px; font-weight: 700;
@@ -173,7 +175,7 @@
     <div class="wrap">
       <span class="badge" data-i18n="hero.badge">本地保存 · 一次买断 · 打开就能写</span>
       <h1 data-i18n="hero.h1">三叶草 · <span>Clover</span></h1>
-<p class="sub" data-i18n="hero.sub">不缺记事本，缺的是一个让你愿意坐下来写字的地方。三叶草把十种会呼吸的纸面、一盏能点亮的氛围台灯、几段可以循环一整夜的治愈环境音，和你的文字放进同一个窗口——打开它，灯光落下来，世界安静了。所有笔记都是你电脑上的普通文件，不上传、不同步；需要动脑时，8 家 AI 就在右手边，每篇笔记各聊各的。</p>
+<p class="sub" data-i18n="hero.sub"><span class="sub-lead">不是为了记录更多，而是让每一次记录都值得。</span>换一张纸，换一种心情；写下一句话，留下一个瞬间。三叶草把记事本做得简单，却把氛围做得不简单——特色纸面、桌面陪伴、本地保存，以及随时可用的 AI 助手，都藏在这本属于你的数字笔记里。<span class="sub-end">打开三叶草，就像翻开一页只属于自己的纸。</span></p>
       <div class="btns">
         <a class="btn primary" href="#download" data-i18n="btn.download">下载体验</a>
         <a class="btn ghost" href="#features" data-i18n="btn.features">看看功能</a>
@@ -330,7 +332,7 @@ var I18N = {
     "nav.features": "功能", "nav.download": "下载购买", "nav.changelog": "更新日志", "nav.faq": "常见问题",
     "hero.badge": "本地保存 · 一次买断 · 打开就能写",
     "hero.h1": "三叶草 · <span>Clover</span>",
-"hero.sub": "不缺记事本，缺的是一个让你愿意坐下来写字的地方。三叶草把十种会呼吸的纸面、一盏能点亮的氛围台灯、几段可以循环一整夜的治愈环境音，和你的文字放进同一个窗口——打开它，灯光落下来，世界安静了。所有笔记都是你电脑上的普通文件，不上传、不同步；需要动脑时，8 家 AI 就在右手边，每篇笔记各聊各的。",
+"hero.sub": "<span class=\"sub-lead\">不是为了记录更多，而是让每一次记录都值得。</span>换一张纸，换一种心情；写下一句话，留下一个瞬间。三叶草把记事本做得简单，却把氛围做得不简单——特色纸面、桌面陪伴、本地保存，以及随时可用的 AI 助手，都藏在这本属于你的数字笔记里。<span class=\"sub-end\">打开三叶草，就像翻开一页只属于自己的纸。</span>",
     "hero.tag1": "🕯 氛围感",
     "hero.tag2": "✨ 与众不同的体验",
     "hero.tag3": "🔒 笔记只存你自己电脑里",
@@ -412,7 +414,7 @@ var I18N = {
     "nav.features": "Features", "nav.download": "Download", "nav.changelog": "Changelog", "nav.faq": "FAQ",
     "hero.badge": "Stored locally · Buy once · Just open and write",
     "hero.h1": "Clover · <span>三叶草</span>",
-"hero.sub": "Note apps are not in short supply — what is rare is a place that makes you want to sit down and write. Clover puts ten paper styles that breathe, a lamp you can switch on, and calming ambience that loops all night into the same window as your words. Open it, the light falls, and the world goes quiet. Every note is a plain file on your own PC — never uploaded, never synced. And when you need to think, eight AIs sit right beside you, each note with its own conversation.",
+"hero.sub": "<span class=\"sub-lead\">Not about writing more — about making every entry worth keeping.</span>Change the paper, change your mood; write one line, keep one moment. Clover keeps the notebook simple and the atmosphere anything but — themed papers, a desktop companion, local storage, and an AI assistant always on hand, all tucked inside a notebook that is yours alone.<span class=\"sub-end\">Open Clover, and it feels like turning to a page that belongs only to you.</span>",
     "hero.tag1": "🕯 Atmosphere",
     "hero.tag2": "✨ Unlike any notebook",
     "hero.tag3": "🔒 Notes never leave your PC",
@@ -494,7 +496,7 @@ var I18N = {
     "nav.features": "功能", "nav.download": "下載購買", "nav.changelog": "更新日誌", "nav.faq": "常見問題",
     "hero.badge": "本機儲存 · 一次買斷 · 打開就能寫",
     "hero.h1": "三葉草 · <span>Clover</span>",
-"hero.sub": "不缺記事本，缺的是一個讓你願意坐下來寫字的地方。三葉草把十種會呼吸的紙面、一盞能點亮的氛圍檯燈、幾段可以循環一整夜的療癒環境音，和你的文字放進同一個視窗——打開它，燈光落下來，世界安靜了。所有筆記都是你電腦上的普通檔案，不上傳、不同步；需要動腦時，8 家 AI 就在右手邊，每篇筆記各聊各的。",
+"hero.sub": "<span class=\"sub-lead\">不是為了記錄更多，而是讓每一次記錄都值得。</span>換一張紙，換一種心情；寫下一句話，留下一個瞬間。三葉草把記事本做得簡單，卻把氛圍做得不簡單——特色紙面、桌面陪伴、本機儲存，以及隨時可用的 AI 助手，都藏在這本屬於你的數位筆記裡。<span class=\"sub-end\">打開三葉草，就像翻開一頁只屬於自己的紙。</span>",
     "hero.tag1": "🕯 氛圍感",
     "hero.tag2": "✨ 與眾不同的體驗",
     "hero.tag3": "🔒 筆記只存你自己電腦裡",
